@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -11,7 +11,7 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage/
 
 # next.js
 /.next/
@@ -40,7 +40,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# editor
+.vscode/
+.idea/
+
 # agent/docs instructions
 CLAUDE.md
 AGENTS.md
 README.md
+PROMPTS.md
