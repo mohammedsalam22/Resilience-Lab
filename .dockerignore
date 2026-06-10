@@ -1,0 +1,17 @@
+# Keep the build context small and the image clean.
+node_modules
+.next
+.git
+.gitignore
+npm-debug.log*
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md
+PROMPTS.md
+*.md
+.vscode
+.idea
+coverage
+.env*.local
+workers

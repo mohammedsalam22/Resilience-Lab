@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The Docker cluster worker (README §9) is a standalone zero-dep CommonJS
+    // Node service, not part of the Next app — lint it on its own terms.
+    "workers/**",
   ]),
 ]);
 

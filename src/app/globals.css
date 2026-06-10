@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: tokens swap when .dark is set on <html> (README §5). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --page-bg: #faf9f5;
+  --card-bg: #f0eee6;
+  --border: #e4e1d5;
+  --text: #1f1e1c;
+  --muted: #6e6b63;
+  --accent: #d97757;
+  --on-accent: #fbf7f2;
+  --healthy: #6a9a78;
+  --warning: #c9943f;
+  --danger: #c2603e;
+  --flow: #5b7fa6;
+  --track: #e4e1d5;
+  /* Node identity palette (consistent-hashing ring) — desaturated, distinct. */
+  --node-0: #5b7fa6;
+  --node-1: #6a9a78;
+  --node-2: #c9943f;
+  --node-3: #8a6aa0;
+  --node-4: #3f8f9a;
+  --node-5: #8c7355;
+}
+
+.dark {
+  color-scheme: dark;
+  --page-bg: #1b1a17;
+  --card-bg: #262624;
+  --border: #3a3833;
+  --text: #eceae3;
+  --muted: #a39e92;
+  --accent: #e08a6b;
+  --on-accent: #1b1a17;
+  --healthy: #7fb58c;
+  --warning: #d8a85a;
+  --danger: #d17552;
+  --flow: #7fa0c4;
+  --track: #35332d;
+  --node-0: #7fa0c4;
+  --node-1: #7fb58c;
+  --node-2: #d8a85a;
+  --node-3: #a98cc0;
+  --node-4: #5fb0bb;
+  --node-5: #ab9070;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-page: var(--page-bg);
+  --color-card: var(--card-bg);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-onAccent: var(--on-accent);
+  --color-healthy: var(--healthy);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-flow: var(--flow);
+  --color-track: var(--track);
+  --color-node-0: var(--node-0);
+  --color-node-1: var(--node-1);
+  --color-node-2: var(--node-2);
+  --color-node-3: var(--node-3);
+  --color-node-4: var(--node-4);
+  --color-node-5: var(--node-5);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-hanken-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background: var(--page-bg);
+    color: var(--text);
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  :focus-visible {
+    outline: 2px solid var(--flow);
+    outline-offset: 2px;
+  }
 }

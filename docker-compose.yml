@@ -1,0 +1,54 @@
+# Resilience Lab — REAL multi-node cluster (README §9).
+#
+#   docker compose up --build
+#
+# Brings up the Next gateway (port 3000) plus four genuinely separate worker
+# containers on a shared network. USE_REAL_CLUSTER flips the LB / health /
+# replication engines from in-process simulation to real cross-container HTTP.
+# Weights 4/2/1/3 match the in-app defaults so Weighted RR behaves identically.
+
+services:
+  gateway:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      USE_REAL_CLUSTER: "true"
+      # NAME|WEIGHT|URL per worker, comma-separated. Reached by service name on
+      # the compose network. Weights drive Weighted Round-Robin.
+      WORKERS: "A|4|http://worker-a:4000,B|2|http://worker-b:4000,C|1|http://worker-c:4000,D|3|http://worker-d:4000"
+      # The gateway calls its own /api/downstream for the REAL resilience demos.
+      NEXT_PUBLIC_BASE_URL: "http://localhost:3000"
+    depends_on:
+      - worker-a
+      - worker-b
+      - worker-c
+      - worker-d
+
+  worker-a:
+    build: ./workers
+    environment:
+      NAME: "A"
+      WEIGHT: "4"
+      PORT: "4000"
+
+  worker-b:
+    build: ./workers
+    environment:
+      NAME: "B"
+      WEIGHT: "2"
+      PORT: "4000"
+
+  worker-c:
+    build: ./workers
+    environment:
+      NAME: "C"
+      WEIGHT: "1"
+      PORT: "4000"
+
+  worker-d:
+    build: ./workers
+    environment:
+      NAME: "D"
+      WEIGHT: "3"
+      PORT: "4000"

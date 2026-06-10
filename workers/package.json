@@ -1,0 +1,14 @@
+{
+  "name": "resilience-lab-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tiny zero-dependency worker node for the Resilience Lab Docker cluster (README §9).",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
